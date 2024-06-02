@@ -1,12 +1,12 @@
 # League of Legends First Turret and First Baron Analysis
-## DSC80 Final Project, UCSD
-League of Legends (LoL) is a 2009 multiplayer online battle arena video game developed and published by Riot Games.
+
+League of Legends First Turret and First Baron Analysis is ...
 
 Author: Chengyuan Mao
 
 ## Introduction
 ### General Introduction
-...
+League of Legends (LoL) is a 2009 multiplayer online battle arena video game developed and published by Riot Games.
 
 ### Introduction of Colmuns
 ...
