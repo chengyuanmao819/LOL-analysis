@@ -1,6 +1,6 @@
-# League of Legends First Turret and First Baron Analysis
+# League of Legends Strategic Resources Analysis
 
-League of Legends First Turret and First Baron Analysis is ...
+League of Legends Strategic Resources Analysis is ...
 
 Author: Chengyuan Mao
 
