@@ -20,7 +20,7 @@ I plot a graph for the distribution of total gold using a histogram.
 
 <iframe
   src="assets/total_gold.html"
-  width="800"
+  width="900"
   height="600"
   frameborder="0"
 ></iframe>
@@ -45,7 +45,7 @@ And an overlapping graph for the total gold distribution by the first turret sta
 
 <iframe
   src="assets/total_gold_overlap.html"
-  width="800"
+  width="900"
   height="600"
   frameborder="0"
 ></iframe>
@@ -69,7 +69,7 @@ I performed bivariate analysis on the 'first turret' and 'result' statistics in 
 
 <iframe
   src="assets/percent_win_w_ft.html"
-  width="800"
+  width="900"
   height="600"
   frameborder="0"
 ></iframe>
@@ -95,7 +95,7 @@ Below is the observed distribution of `firstbaron` when `dragons (type unknown)`
 
 <iframe
   src="assets/dist_TVD1.html"
-  width="800"
+  width="900"
   height="600"
   frameborder="0"
 ></iframe>
@@ -111,7 +111,7 @@ Below is the observed distribution of `result` when `dragons (type unknown)` is 
 
 <iframe
   src="assets/dist_TVD2.html"
-  width="800"
+  width="900"
   height="600"
   frameborder="0"
 ></iframe>
@@ -126,7 +126,7 @@ Since the p-value `1.0` is greater than `0.5` significance level, we fail to rej
 
 <iframe
   src="assets/permu_dist.html"
-  width="800"
+  width="900"
   height="600"
   frameborder="0"
 ></iframe>
