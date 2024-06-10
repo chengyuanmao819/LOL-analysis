@@ -16,7 +16,15 @@ League of Legends (LoL) is a 2009 multiplayer online battle arena video game dev
 ...
 
 ### Univariate Analysis
-Distribution of Total Gold (graph)
+I plot a graph for the distribution of total gold using a histogram.
+
+<iframe
+  src="assets/total_gold.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
 The graph shows the distribution of total gold owned across a population or dataset. It is a histogram, where the x-axis represents the total amount of gold, and the y-axis shows the frequency or number of cases at each gold amount level.
 
 The distribution appears to be roughly bell-shaped or normal, with the peak frequency occurring around 50,000-60,000 units of total gold. This suggests that most cases or individuals in the dataset have a moderate amount of gold around that central value.
@@ -32,7 +40,32 @@ Some key observations from the distribution:
 
 This type of distribution pattern could arise in various contexts, such as wealth or resource ownership, where a majority of cases cluster around a moderate level, but there are also some cases with significantly more or less of the measured quantity.
 
+
+And an overlapping graph for the total gold distribution by the first turret status.
+
+<iframe
+  src="assets/total_gold_overlap.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+This graph shows an overlapping histogram of the distribution of total gold, split by a categorical variable called "First Tower Status" which has two levels: True and False.
+
+The blue bars represent the distribution for cases where First Tower Status is True, while the orange bars represent the distribution for cases where First Tower Status is False.
+
+A few observations can be made:
+
+1. Both distributions are roughly bell-shaped or normal, with a peak around 50,000-60,000 total gold.
+
+2. However, the distribution for First Tower Status = True (blue) has a higher peak and is slightly shifted towards the right compared to the False distribution (orange). This suggests that cases with First Tower Status = True tend to have somewhat higher total gold amounts on average.
+
+3. The spread or variance of the True distribution also appears slightly wider than the False distribution, indicating more variability in total gold amounts when First Tower Status is True.
+
+Overall, this visualization allows us to compare the total gold distributions for the two levels of the First Tower Status variable. While the shapes are broadly similar, there are discernible differences in the central tendencies, spreads, and tail behaviors that could point to an association between First Tower Status and total gold ownership patterns.
+
 ### Bivariate Analysis
+I performed bivariate analysis on the 'first turret' and 'result' statistics in the dataset to visualize the impact of obtaining the first tower on the game's outcome.
 
 <iframe
   src="assets/percent_win_w_ft.html"
