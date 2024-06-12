@@ -1,19 +1,38 @@
 # League of Legends Strategic Resources Analysis
 
-League of Legends Strategic Resources Analysis is ...
+League of Legends Strategic Resources Analysis is an extensive data science project conducted at UCSD. This project involves several stages, including exploratory data analysis, hypothesis testing, development of baseline models, and a final fairness analysis. The main objective is to examine the importance of the "first turret" and "first mid-lane turret" events in League of Legends matches, and to assess their impact on match statistics and outcomes.
 
-Author: Chengyuan Mao
+By: Chengyuan Mao
 
 ## Introduction
 ### General Introduction
-League of Legends (LoL) is a 2009 multiplayer online battle arena video game developed and published by Riot Games.
+League of Legends (LoL), developed and published by Riot Games in 2009, is a multiplayer online battle arena video game that has gained immense popularity worldwide. With its vast player base, it has emerged as one of the most influential and widely played esports titles in the gaming industry. The dataset we will be working with is a professional dataset curated by Oracle's Elixir, which records match data from professional LoL esports gaming events throughout the year 2023.
 
 ### Introduction of Colmuns
-...
+The dataset has ... col, .... data
+
+|Column Name                  |Type    |Description|
+|---                          |---     |---|
+|`'result'`                   |str     |Outcome of the match for the team (e.g., win or loss).|
+|`'firsttower'`               |str     |Indicator of whether the team destroyed the first tower in the game (e.g., 1 for yes, 0 for no).|
+|`'firstmidtower'`            |str     |Indicator of whether the team destroyed the first middle lane tower (e.g., 1 for yes, 0 for no).|
+|`'heralds'`                  |int     |Number of Rift Heralds the team secured during the game.|
+|`'firstherald'`              |str     |Indicator of whether the team secured the first Rift Herald (e.g., 1 for yes, 0 for no).|
+|`'totalgold'`                |int     |Total gold earned by the team by the end of the game.|
+|`'goldat10'`                 |int     |Total gold earned by the team at the 10-minute mark.|
+|`'killsat10'`                |int     |Total number of kills achieved by the team at the 10-minute mark.|
+|`'golddiffat10'`             |int     |Difference in gold between the team and the opposing team at the 10-minute mark.|
+|`'goldat15'`                 |int     |Total gold earned by the team at the 15-minute mark.|
+|`'killsat15'`                |int     |Total number of kills achieved by the team at the 15-minute mark.|
+|`'golddiffat15'`             |int     |Difference in gold between the team and the opposing team at the 15-minute mark.|
+|`'firstblood'`               |str     |Indicator of whether the team achieved the first kill (first blood) in the game (e.g., 1 for yes, 0 for no).|
+|`'firstdragon'`              |str     |Indicator of whether the team secured the first dragon in the game (e.g., 1 for yes, 0 for no).|
+|`'turretplates'`             |int     |Total number of turret plates destroyed by the team during the laning phase.|
+|`'dragons (type unknown)'`   |int     |Total number of dragons of unspecified type secured by the team during the game.|
 
 ## Data Cleaning and Exploratory Data Analysis
 ### Data Cleaning
-...
+First I ...
 
 ### Univariate Analysis
 I plot a graph for the distribution of total gold using a histogram.
@@ -135,16 +154,44 @@ Based on the hypothesis test performed, with a `p-value` of `0.0`, we reject the
 
 ## Framing a Prediction Problem
 ### Problem Identification
-...
+From the previous section, I observed that securing the first turret in a League of Legends match can have a significant impact on a team's economy, which in turn influences the outcome of the game. This indicates that the first turret is an important strategic resource in the game.
+
+However, the first mid-lane turret is even more crucial because the mid-lane can influence both the top and bottom lanes. Additionally, the team that secures the first mid-lane turret will have a significant control advantage over other important map resources, such as jungle monsters, dragons, and key vision areas. So, what factors influence whether a team can secure the first mid-lane turret? In other words, can I predict whether a team will secure the first mid-lane turret in a match by analyzing their game statistics (e.g., first blood kills, turret plates, gold difference, and other related features)?
+
+To address this question, I can use machine learning techniques, such as **classification algorithms**. Therefore, I establish my model based on the following **prediction problem**: Can I predict whether a team will secure the first mid-lane turret in a match based on their other game statistics? By analyzing and modeling these data, I aim to identify the key factors that influence this critical event, thereby helping teams develop more effective strategies and tactics to improve their chances of winning.
+
+To prevent overfitting, I will split the data into two parts: 75% for training and 25% for testing. For model evaluation, I will use both accuracy and F1-score.
+
+For each team, I will use the following features for prediction: `heralds`, `firstblood`, `turretplates`, `golddiffat10`, and `firsttower`. These statistics are collected during the game and will be used to train my model.
 
 
 ## Baseline Model
-For the baseline model, I used a Random Forest Classifier, with the following features: 
+For the baseline model, I used a Random Forest Classifier, with the following features: `heralds`, `firstblood`, `turretplates`, `golddiffat10`, and `firsttower`. Among these five features, three of them are quantitative: `heralds`, `turretplates`, and `golddiffat10`. I utilized Stan
+
+After fitting the model, my accuracy score is **0.9620** on the train data and **0.7220** on the test data with a **0.7671** F-1 score.
 
 
 ## Final Model
-...
+In my final model, I added ...
+
+After fitting the model, my accuracy score is **0.8400** on the test data with a **0.8627** F-1 score.
 
 
 ## Fairness Analysis
-...
+In this section, I aim to evaluate the fairness of my model across different groups. The central question is:  **"Does my model perform worse for teams who have ... or not have ...?"** 
+
+To address this query, I conducted a permutation test to examine the difference in accuracy between two groups:
+
+Group `X` represents the teams who have...
+Group `Y` represents those teams who do not have ... 
+The evaluation metric employed is accuracy, and the significance level is set at 0.5.
+
+By performing the permutation test and analyzing the accuracy differential, I endeavor to ascertain whether my model exhibits biased performance favoring one group over the other. This analysis is crucial for assessing the model's fairness and identifying potential areas for improvement to mitigate any undesirable disparities.
+
+The followings are my hypothesis:
+
+* **Null Hypothesis**: My model is fair. ...
+* **Alternative Hypothesis**: My model is not fair. ...
+* **Test Statistics:**: ...
+
+After performing the permutation test, the result p-value I got is `1`, which is greater than the 0.05 significance level. Consequently, we ... reject the null hypothesis. This outcome implies that my model predicts teams from both groups with statistically similar accuracy levels. Consequently, my model appears to be fair, exhibiting no discernble bias towords one group over the other based on the specified criteria. (need rewrite)
