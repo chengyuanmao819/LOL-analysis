@@ -2,7 +2,7 @@
 
 League of Legends Strategic Resources Analysis is an extensive data science project conducted at UCSD. This project involves several stages, including exploratory data analysis, hypothesis testing, development of baseline models, and a final fairness analysis. The main objective is to examine the importance of the "first turret" and "first mid-lane turret" events in League of Legends matches, and to assess their impact on match statistics and outcomes.
 
-By: Chengyuan Mao
+By Chengyuan Mao
 
 ## Introduction
 ### General Introduction
