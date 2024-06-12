@@ -13,22 +13,22 @@ The dataset has ... col, .... data
 
 |Column Name                  |Type    |Description|
 |---                          |---     |---|
-|`'result'`                   |str     |Outcome of the match for the team (e.g., win or loss).|
-|`'firsttower'`               |str     |Indicator of whether the team destroyed the first tower in the game (e.g., 1 for yes, 0 for no).|
-|`'firstmidtower'`            |str     |Indicator of whether the team destroyed the first middle lane tower (e.g., 1 for yes, 0 for no).|
-|`'heralds'`                  |int     |Number of Rift Heralds the team secured during the game.|
-|`'firstherald'`              |str     |Indicator of whether the team secured the first Rift Herald (e.g., 1 for yes, 0 for no).|
+|`'result'`                   |int     |Outcome of the match for the team (e.g., 1 for win, 0 for loss).|
+|`'firsttower'`               |float     |Indicator of whether the team destroyed the first tower in the game (e.g., 1 for yes, 0 for no).|
+|`'firstmidtower'`            |float     |Indicator of whether the team destroyed the first middle lane tower (e.g., 1 for yes, 0 for no).|
+|`'heralds'`                  |float     |Number of Rift Heralds the team secured during the game.|
+|`'firstherald'`              |float     |Indicator of whether the team secured the first Rift Herald (e.g., 1 for yes, 0 for no).|
 |`'totalgold'`                |int     |Total gold earned by the team by the end of the game.|
-|`'goldat10'`                 |int     |Total gold earned by the team at the 10-minute mark.|
-|`'killsat10'`                |int     |Total number of kills achieved by the team at the 10-minute mark.|
-|`'golddiffat10'`             |int     |Difference in gold between the team and the opposing team at the 10-minute mark.|
-|`'goldat15'`                 |int     |Total gold earned by the team at the 15-minute mark.|
-|`'killsat15'`                |int     |Total number of kills achieved by the team at the 15-minute mark.|
-|`'golddiffat15'`             |int     |Difference in gold between the team and the opposing team at the 15-minute mark.|
-|`'firstblood'`               |str     |Indicator of whether the team achieved the first kill (first blood) in the game (e.g., 1 for yes, 0 for no).|
-|`'firstdragon'`              |str     |Indicator of whether the team secured the first dragon in the game (e.g., 1 for yes, 0 for no).|
-|`'turretplates'`             |int     |Total number of turret plates destroyed by the team during the laning phase.|
-|`'dragons (type unknown)'`   |int     |Total number of dragons of unspecified type secured by the team during the game.|
+|`'goldat10'`                 |float     |Total gold earned by the team at the 10-minute mark.|
+|`'killsat10'`                |float     |Total number of kills achieved by the team at the 10-minute mark.|
+|`'golddiffat10'`             |float     |Difference in gold between the team and the opposing team at the 10-minute mark.|
+|`'goldat15'`                 |float     |Total gold earned by the team at the 15-minute mark.|
+|`'killsat15'`                |float     |Total number of kills achieved by the team at the 15-minute mark.|
+|`'golddiffat15'`             |float     |Difference in gold between the team and the opposing team at the 15-minute mark.|
+|`'firstblood'`               |float     |Indicator of whether the team achieved the first kill (first blood) in the game (e.g., 1 for yes, 0 for no).|
+|`'firstdragon'`              |float     |Indicator of whether the team secured the first dragon in the game (e.g., 1 for yes, 0 for no).|
+|`'turretplates'`             |float     |Total number of turret plates destroyed by the team during the laning phase.|
+|`'dragons (type unknown)'`   |float     |Total number of dragons of unspecified type secured by the team during the game.|
 
 ## Data Cleaning and Exploratory Data Analysis
 ### Data Cleaning
