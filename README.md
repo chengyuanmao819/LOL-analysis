@@ -128,7 +128,7 @@ I first groupby the cleaned data set with firsttower status and then calculate t
 In my dataset, I believe the colums `a`
 
 ## Missingness Dependency
-In this section, I will test whether the missingness of the `dragons (type unknown)` column depends on `firstbaron` and `result`. For both of my permutation tests, I will use a significance level of 0.5 and Total Variance Distance (TVD) as the test statistic.
+In this section, I will test whether the missingness of the `dragons (type unknown)` column depends on `firstbaron` and `result`. For both of my permutation tests, I will use a significance level of 0.05 and Total Variance Distance (TVD) as the test statistic.
 
 ### The First Permutation Test
 **Null Hypothesis**: The missingness of the `dragons (type unknown)` column is **independent** of the `firstbaron`.
@@ -149,7 +149,7 @@ Below is the observed distribution of `firstbaron` when `dragons (type unknown)`
   frameborder="0"
 ></iframe>
 
-Since the p-value `0.0` is less than `0.5` significance level, we reject the null hypothesis. Therefore, the missingness of `dragons (type unknown)` is depends on the `firstbaron` column.
+Since the **p-value** of **0.0** is less than **0.05** significance level, we **reject** the null hypothesis. Therefore, the missingness of `dragons (type unknown)` is depends on the `firstbaron` column.
 
 ### The Second Permutation Test
 **Null Hypothesis**: The missingness of the `dragons (type unknown)` column is **independent** of `result`.
@@ -170,7 +170,7 @@ Below is the observed distribution of `result` when `dragons (type unknown)` is 
   frameborder="0"
 ></iframe>
 
-Since the p-value `1.0` is greater than `0.5` significance level, we **fail to reject** the null hypothesis. Therefore, the missingness of `dragons (type unknown)` is **NOT** depends on the `result` column.
+Since the **p-value** of **1.0** is greater than **0.05** significance level, we **fail to reject** the null hypothesis. Therefore, the missingness of `dragons (type unknown)` is **NOT** depends on the `result` column.
 
 # Hypothesis Testing
 **Null Hypothesis**: The distribution of total gold for the team that gets the first turret is the same as the team that does not get the first turret. 
@@ -193,7 +193,7 @@ Since the p-value `1.0` is greater than `0.5` significance level, we **fail to r
   frameborder="0"
 ></iframe>
 
-Based on the hypothesis test performed, with a `p-value` of `0.0`, we **reject** the null hypothesis. This suggests that the distribution of total gold for the team that gets the first turret is **NOT** the same as the team that does not get the first turret.
+Based on the hypothesis test performed, with a **p-value** of **0.0**, we **reject** the null hypothesis. This suggests that the distribution of total gold for the team that gets the first turret is **NOT** the same as the team that does not get the first turret.
 
 # Framing a Prediction Problem
 ## Problem Identification
