@@ -6,10 +6,10 @@ By Chengyuan Mao
 
 # Introduction
 ## General Introduction
-League of Legends (LoL), developed and published by Riot Games in 2009, is a multiplayer online battle arena video game that has gained immense popularity worldwide. With its vast player base, it has emerged as one of the most influential and widely played esports titles in the gaming industry. The dataset we will be working with is a professional dataset curated by Oracle's Elixir, which records match data from professional LoL esports gaming events throughout the year 2023.
+<a href="https://en.wikipedia.org/wiki/League_of_Legends">League of Legends (LoL)</a>, developed and published by <a href="https://en.wikipedia.org/wiki/Riot_Games">Riot Games, Inc.</a> in 2009, is a multiplayer online battle arena video game that has gained immense popularity worldwide. With its vast player base, it has emerged as one of the most influential and widely played esports titles in the gaming industry. The dataset we will be working with is a professional dataset curated by Oracle's Elixir, which records match data from professional LoL esports gaming events throughout the year 2023.
 
 ## Question Identification
-In a game of League of Legends, ten players are divided into two teams to compete against each other. Each player has their own role and responsibilities, but the ultimate goal is to secure as many strategic resources as possible and eventually destroy the enemy's Nexus located in their base. On the League of Legends map, turrets are considered one of the most important strategic resources. Taking down an opponent's turret not only grants each player on the team additional gold but also provides control over neutral resources and vision around the turret area. More importantly, if a team manages to take the first (mid lane) turret in a game, it signifies that they have gained an early advantage, which can have a profound impact on the team's economy and overall game situation.
+In a game of League of Legends, 10 players are divided into two teams to compete against each other. Each player has their own role and responsibilities, but the ultimate goal is to secure as many strategic resources as possible and eventually destroy the enemy's <a href="https://leagueoflegends.fandom.com/wiki/Nexus">Nexus</a> located in their base. On the League of Legends map, <a href="https://leagueoflegends.fandom.com/wiki/Turret">turrets</a> (tower) are considered one of the most important strategic resources. Taking down an opponent's turret not only grants each player on the team additional gold but also provides control over neutral resources and vision around the turret area. More importantly, if a team manages to take the first (mid lane) turret in a game, it signifies that they have gained an early advantage, which can have a profound impact on the team's economy and overall game situation.
 
 In this project, I aim to study the extent of the economic and situational advantages that securing the first (mid lane) turret brings to the team, and how these advantages influence the resource contention and the outcome of the game. Through this research, I hope to quantify the strategic value of the first mid lane turret and provide concrete data to help players and teams better understand and utilize this key resource, thereby enhancing the overall competitive level and tactical depth of the game.
 
@@ -23,7 +23,7 @@ Below is a brief description of the columns related to my project and their data
 |`'result'`                   |int     |Outcome of the match for the team (e.g., 1 for win, 0 for loss).|
 |`'firsttower'`               |float     |Indicator of whether the team destroyed the first tower in the game (e.g., 1 for yes, 0 for no).|
 |`'firstmidtower'`            |float     |Indicator of whether the team destroyed the first middle lane tower (e.g., 1 for yes, 0 for no).|
-|`'heralds'`                  |float     |Number of Rift Heralds the team secured during the game.|
+|`'heralds'`                  |float     |Number of <a href="https://leagueoflegends.fandom.com/wiki/Rift_Herald/LoL">Rift Heralds</a> the team secured during the game.|
 |`'firstherald'`              |float     |Indicator of whether the team secured the first Rift Herald (e.g., 1 for yes, 0 for no).|
 |`'totalgold'`                |int     |Total gold earned by the team by the end of the game.|
 |`'goldat10'`                 |float     |Total gold earned by the team at the 10-minute mark.|
@@ -34,14 +34,15 @@ Below is a brief description of the columns related to my project and their data
 |`'golddiffat15'`             |float     |Difference in gold between the team and the opposing team at the 15-minute mark.|
 |`'firstblood'`               |float     |Indicator of whether the team achieved the first kill (first blood) in the game (e.g., 1 for yes, 0 for no).|
 |`'firstdragon'`              |float     |Indicator of whether the team secured the first dragon in the game (e.g., 1 for yes, 0 for no).|
-|`'turretplates'`             |float     |Total number of turret plates destroyed by the team during the laning phase.|
+|`'firstbaron'`               |float     |Indicator of whether the team secured the first <a href="https://leagueoflegends.fandom.com/wiki/Baron_Nashor/LoL">baron</a> in the game (e.g., 1 for yes, 0 for no).|
+|`'turretplates'`             |float     |Total number of <a href="https://leagueoflegends.fandom.com/wiki/Turret#General">turret plates</a> destroyed by the team during the laning phase.|
 |`'dragons (type unknown)'`   |float     |Total number of dragons of unspecified type secured by the team during the game.|
 
 # Data Cleaning and Exploratory Data Analysis
 ## Data Cleaning
-To save time in the further data cleaning steps, I first only keep the relevant columns: `result`, `firsttower`, `firstmidtower`, `heralds`, `firstherald`, `totalgold`, `goldat10`, `killsat10`, `golddiffat10`, `goldat15`, `killsat15`, `golddiffat15`, `firstblood`, `firstdragon`, `firstbaron`, `turretplates`, and `dragons(type unknown)`. From the last section, **Introduction of Columns**, I found out that a lot of columns' data types should be `bool`, but they are actually `float` or `int`, e.g., `result`, `firsttower`, `firstherald`, etc. After determining which rows should change data types, I convert all of them to the `bool` type.
+To save time in the further data cleaning steps, I first only keep the relevant columns: `result`, `firsttower`, `firstmidtower`, `heralds`, `firstherald`, `totalgold`, `goldat10`, `killsat10`, `golddiffat10`, `goldat15`, `killsat15`, `golddiffat15`, `firstblood`, `firstdragon`, `firstbaron`, `turretplates`, and `dragons(type unknown)`. From the last section, **"Introduction of Columns"**, I found out that a lot of columns' data types should be `bool`, but they are actually `float` or `int`, e.g., `result`, `firsttower`, `firstherald`, etc. After determining which rows should change data types, I convert all of them to the `bool` type.
 
-Below is the head of my cleaned `lol` dataframe.
+Below is the head of my cleaned `lol` dataframe:
 
 |    | result   | firsttower   | firstmidtower   |   heralds | firstherald   |   totalgold |   goldat10 |   killsat10 |   golddiffat10 |   goldat15 |   killsat15 |   golddiffat15 | firstblood   | firstdragon   |   firstbaron |   turretplates |   dragons (type unknown) |
 |---:|:---------|:-------------|:----------------|----------:|:--------------|------------:|-----------:|------------:|---------------:|-----------:|------------:|---------------:|:-------------|:--------------|-------------:|---------------:|-------------------------:|
@@ -52,7 +53,7 @@ Below is the head of my cleaned `lol` dataframe.
 |  4 | True     | False        | True            |         0 | False         |       60938 |      14794 |           1 |          -1001 |      22945 |           2 |          -1901 | False        | False         |            0 |              3 |                      nan |
 
 ## Univariate Analysis
-I plot a graph for the distribution of total gold using a histogram.
+I plot a graph for the distribution of total gold using a histogram:
 
 <iframe
   src="assets/total_gold.html"
@@ -61,7 +62,7 @@ I plot a graph for the distribution of total gold using a histogram.
   frameborder="0"
 ></iframe>
 
-The graph shows the distribution of total gold owned across a population or dataset. It is a histogram, where the x-axis represents the total amount of gold, and the y-axis shows the frequency or number of cases at each gold amount level.
+The graph shows the distribution of total gold owned across the lol dataset. It is a histogram, where the x-axis represents the total amount of gold, and the y-axis shows the frequency or number of cases at each gold amount level.
 
 The distribution appears to be roughly bell-shaped or normal, with the peak frequency occurring around 50,000-60,000 units of total gold. This suggests that most cases or individuals in the dataset have a moderate amount of gold around that central value.
 
@@ -77,7 +78,7 @@ Some key observations from the distribution:
 This type of distribution pattern could arise in various contexts, such as wealth or resource ownership, where a majority of cases cluster around a moderate level, but there are also some cases with significantly more or less of the measured quantity.
 
 
-And an overlapping graph for the total gold distribution by the first turret status.
+And an overlapping graph for the total gold distribution by the first turret status:
 
 <iframe
   src="assets/total_gold_overlap.html"
@@ -113,7 +114,7 @@ I performed bivariate analysis on the 'first turret' and 'result' statistics in 
 Securing the first turret in a match grants a significant strategic edge. Statistics show that teams accomplishing this objective claim victory around 64% of the time. This notably higher win rate underscores the pivotal role of obtaining an early turret advantage. Capturing this key strategic resource evidently sets the stage for subsequent dominance, ultimately translating to an increased likelihood of overall triumph.
 
 ## Interesting Aggregates
-Here are some compelling aggregates to consider for investment within the dataset.
+Here are some compelling aggregates to consider for investment within the dataset:
 
 | firsttower   |   result |   firstmidtower |   heralds |   firstherald |   totalgold |    goldat10 |   killsat10 |   golddiffat10 |    goldat15 |   killsat15 |   golddiffat15 |   firstblood |   firstdragon |   firstbaron |   turretplates |   dragons (type unknown) |
 |:-------------|---------:|----------------:|----------:|--------------:|------------:|------------:|------------:|---------------:|------------:|------------:|---------------:|-------------:|--------------:|-------------:|---------------:|-------------------------:|
@@ -130,8 +131,9 @@ In my dataset, I believe the colums `a`
 In this section, I will test whether the missingness of the `dragons (type unknown)` column depends on `firstbaron` and `result`. For both of my permutation tests, I will use a significance level of 0.5 and Total Variance Distance (TVD) as the test statistic.
 
 ### The First Permutation Test
-- Null Hypothesis: The missingness of the `dragons (type unknown)` column is independent of the `firstbaron`.
-- Alternative Hypothesis: The missingness of the `dragons (type unknown)` column depends on the `firstbaron`.
+**Null Hypothesis**: The missingness of the `dragons (type unknown)` column is **independent** of the `firstbaron`.
+
+**Alternative Hypothesis**: The missingness of the `dragons (type unknown)` column **depends** on the `firstbaron`.
 
 Below is the observed distribution of `firstbaron` when `dragons (type unknown)` is missing and not missing.
 
@@ -145,9 +147,9 @@ Below is the observed distribution of `firstbaron` when `dragons (type unknown)`
 Since the p-value `0.0` is less than `0.5` significance level, we reject the null hypothesis. Therefore, the missingness of `dragons (type unknown)` is depends on the `firstbaron` column.
 
 ### The Second Permutation Test
+**Null Hypothesis**: The missingness of the `dragons (type unknown)` column is **independent** of `result`.
 
-- Null Hypothesis: The missingness of the `dragons (type unknown)` column is independent of `result`.
-- Alternative Hypothesis: The missingness of the `dragons (type unknown)` column depends on `result`.
+**Alternative Hypothesis**: The missingness of the `dragons (type unknown)` column **depends** on `result`.
 
 Below is the observed distribution of `result` when `dragons (type unknown)` is missing and not missing.
 
@@ -158,13 +160,16 @@ Below is the observed distribution of `result` when `dragons (type unknown)` is 
   frameborder="0"
 ></iframe>
 
-Since the p-value `1.0` is greater than `0.5` significance level, we fail to reject the null hypothesis. Therefore, the missingness of `dragons (type unknown)` is not depends on the `result` column.
+Since the p-value `1.0` is greater than `0.5` significance level, we **fail to reject** the null hypothesis. Therefore, the missingness of `dragons (type unknown)` is **NOT** depends on the `result` column.
 
 # Hypothesis Testing
-* Null: The distribution of total gold for the team that gets the first turret is the same as the team that does not get the first turret. 
-* Alternative: The distribution of total gold for the team that gets the first turret is NOT the same as the team that does not get the first turret. 
-* Test Statistics: Absolute mean difference between total gold with and without first turret.
-* Significance Level: 5%
+**Null Hypothesis**: The distribution of total gold for the team that gets the first turret is the same as the team that does not get the first turret. 
+
+**Alternative Hypothesis**: The distribution of total gold for the team that gets the first turret is **NOT** the same as the team that does not get the first turret. 
+
+**Test Statistics**: Absolute mean difference between total gold with and without first turret.
+
+**Significance Level**: 5%
 
 <iframe
   src="assets/permu_dist.html"
@@ -173,7 +178,7 @@ Since the p-value `1.0` is greater than `0.5` significance level, we fail to rej
   frameborder="0"
 ></iframe>
 
-Based on the hypothesis test performed, with a `p-value` of `0.0`, we reject the null hypothesis. This suggests that the distribution of total gold for the team that gets the first turret is NOT the same as the team that does not get the first turret.
+Based on the hypothesis test performed, with a `p-value` of `0.0`, we **reject** the null hypothesis. This suggests that the distribution of total gold for the team that gets the first turret is **NOT** the same as the team that does not get the first turret.
 
 # Framing a Prediction Problem
 ## Problem Identification
@@ -213,8 +218,10 @@ By performing the permutation test and analyzing the accuracy differential, I en
 
 The followings are my hypothesis:
 
-* **Null Hypothesis**: My model is fair. ...
-* **Alternative Hypothesis**: My model is not fair. ...
-* **Test Statistics:**: ...
+**Null Hypothesis**: My model is fair. ...
+
+**Alternative Hypothesis**: My model is not fair. ...
+
+**Test Statistics:**: ...
 
 After performing the permutation test, the result p-value I got is `1`, which is greater than the 0.05 significance level. Consequently, we ... reject the null hypothesis. This outcome implies that my model predicts teams from both groups with statistically similar accuracy levels. Consequently, my model appears to be fair, exhibiting no discernble bias towords one group over the other based on the specified criteria. (need rewrite)
