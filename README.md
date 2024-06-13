@@ -8,8 +8,15 @@ By Chengyuan Mao
 ### General Introduction
 League of Legends (LoL), developed and published by Riot Games in 2009, is a multiplayer online battle arena video game that has gained immense popularity worldwide. With its vast player base, it has emerged as one of the most influential and widely played esports titles in the gaming industry. The dataset we will be working with is a professional dataset curated by Oracle's Elixir, which records match data from professional LoL esports gaming events throughout the year 2023.
 
+### Question Identification
+In a game of League of Legends, ten players are divided into two teams to compete against each other. Each player has their own role and responsibilities, but the ultimate goal is to secure as many strategic resources as possible and eventually destroy the enemy's Nexus located in their base. On the League of Legends map, turrets are considered one of the most important strategic resources. Taking down an opponent's turret not only grants each player on the team additional gold but also provides control over neutral resources and vision around the turret area. More importantly, if a team manages to take the first (mid lane) turret in a game, it signifies that they have gained an early advantage, which can have a profound impact on the team's economy and overall game situation.
+
+In this project, I aim to study the extent of the economic and situational advantages that securing the first (mid lane) turret brings to the team, and how these advantages influence the resource contention and the outcome of the game. Through this research, I hope to quantify the strategic value of the first mid lane turret and provide concrete data to help players and teams better understand and utilize this key resource, thereby enhancing the overall competitive level and tactical depth of the game.
+
 ### Introduction of Colmuns
-The dataset has ... col, .... data
+In this dataset, important features of each match in the 2023 professional League of Legends games are recorded, containing 148,992 rows, with each match looping in 12 rows. The first ten rows of each loop represent the ten players of the two teams, and the last two rows represent the aggregated data of the two teams.
+
+Below is a brief description of the columns related to my project and their data types:
 
 |Column Name                  |Type    |Description|
 |---                          |---     |---|
@@ -32,7 +39,17 @@ The dataset has ... col, .... data
 
 ## Data Cleaning and Exploratory Data Analysis
 ### Data Cleaning
-First I ...
+To save time in the further data cleaning steps, I first only keep the relevant columns: `result`, `firsttower`, `firstmidtower`, `heralds`, `firstherald`, `totalgold`, `goldat10`, `killsat10`, `golddiffat10`, `goldat15`, `killsat15`, `golddiffat15`, `firstblood`, `firstdragon`, `firstbaron`, `turretplates`, and `dragons(type unknown)`. From the last section, **Introduction of Columns**, I found out that a lot of columns' data types should be `bool`, but they are actually `float` or `int`, e.g., `result`, `firsttower`, `firstherald`, etc. After determining which rows should change data types, I convert all of them to the `bool` type.
+
+Below is the head of my cleaned `lol` dataframe.
+
+|    | result   | firsttower   | firstmidtower   |   heralds | firstherald   |   totalgold |   goldat10 |   killsat10 |   golddiffat10 |   goldat15 |   killsat15 |   golddiffat15 | firstblood   | firstdragon   |   firstbaron |   turretplates |   dragons (type unknown) |
+|---:|:---------|:-------------|:----------------|----------:|:--------------|------------:|-----------:|------------:|---------------:|-----------:|------------:|---------------:|:-------------|:--------------|-------------:|---------------:|-------------------------:|
+|  0 | True     | True         | True            |         2 | True          |       72807 |      14612 |           0 |             75 |      22384 |           0 |           -530 | False        | False         |            1 |              4 |                      nan |
+|  1 | False    | False        | False           |         0 | False         |       62745 |      14537 |           0 |            -75 |      22914 |           1 |            530 | True         | True          |            0 |              2 |                      nan |
+|  2 | False    | False        | True            |         2 | True          |       80627 |      15969 |           2 |           -361 |      24771 |           4 |            673 | False        | False         |            1 |              6 |                      nan |
+|  3 | True     | True         | False           |         0 | False         |       77449 |      16330 |           2 |            361 |      24098 |           3 |           -673 | True         | True          |            0 |              2 |                      nan |
+|  4 | True     | False        | True            |         0 | False         |       60938 |      14794 |           1 |          -1001 |      22945 |           2 |          -1901 | False        | False         |            0 |              3 |                      nan |
 
 ### Univariate Analysis
 I plot a graph for the distribution of total gold using a histogram.
@@ -96,8 +113,14 @@ I performed bivariate analysis on the 'first turret' and 'result' statistics in 
 Securing the first turret in a match grants a significant strategic edge. Statistics show that teams accomplishing this objective claim victory around 64% of the time. This notably higher win rate underscores the pivotal role of obtaining an early turret advantage. Capturing this key strategic resource evidently sets the stage for subsequent dominance, ultimately translating to an increased likelihood of overall triumph.
 
 ### Interesting Aggregates
-I first groupby the cleaned data set with firsttower status and then calculate the sum of all statistics.
+Here are some compelling aggregates to consider for investment within the dataset.
 
+| firsttower   |   result |   firstmidtower |   heralds |   firstherald |   totalgold |    goldat10 |   killsat10 |   golddiffat10 |    goldat15 |   killsat15 |   golddiffat15 |   firstblood |   firstdragon |   firstbaron |   turretplates |   dragons (type unknown) |
+|:-------------|---------:|----------------:|----------:|--------------:|------------:|------------:|------------:|---------------:|------------:|------------:|---------------:|-------------:|--------------:|-------------:|---------------:|-------------------------:|
+| False        |     2663 |            2396 |      6204 |          2974 | 4.78621e+08 | 1.35291e+08 |       15404 |   -6.74411e+06 | 2.10885e+08 |       29248 |   -1.66055e+07 |         3625 |          3786 |         2785 |          27572 |                        0 |
+| True         |     7828 |            9762 |     11313 |          9180 | 7.12551e+08 | 1.42036e+08 |       22070 |    6.74411e+06 | 2.2749e+08  |       41589 |    1.66055e+07 |         6847 |          8368 |         5752 |          50590 |                     7106 |
+
+I first groupby the cleaned data set with firsttower status and then calculate the sum of all statistics. By comparing the gaming statistics with and without first turret. From the results, the data for the team that secures the first turret is overall higher than that of the team that fails to secure the first turret.
 
 ## Assessment of Missingness
 ### NMAR Analysis
