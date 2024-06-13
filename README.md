@@ -1,6 +1,6 @@
 # League of Legends Strategic Resources Analysis
 
-League of Legends Strategic Resources Analysis is an extensive data science project conducted at UCSD. This project involves several stages, including exploratory data analysis, hypothesis testing, development of baseline models, and a final fairness analysis. The main objective is to examine the importance of the "first turret" and "first mid-lane turret" events in League of Legends matches, and to assess their impact on match statistics and outcomes.
+League of Legends Strategic Resources Analysis is an extensive data science project conducted at UCSD. This project involves several stages, including exploratory data analysis, hypothesis testing, development of baseline models, and a final fairness analysis. The main objective is to examine the importance of the **first turret** and **first mid-lane turret** events in League of Legends matches, and to assess their impact on match statistics and outcomes.
 
 By Chengyuan Mao
 
@@ -41,7 +41,7 @@ Below is a brief description of the columns related to my project and their data
 
 # Data Cleaning and Exploratory Data Analysis
 ## Data Cleaning
-To save time in the further data cleaning steps, I first only keep the relevant columns: `result`, `side`, `firsttower`, `firstmidtower`, `heralds`, `firstherald`, `totalgold`, `goldat10`, `killsat10`, `golddiffat10`, `goldat15`, `killsat15`, `golddiffat15`, `firstblood`, `firstdragon`, `firstbaron`, `turretplates`, and `dragons(type unknown)`. From the last section, **"Introduction of Columns"**, I found out that a lot of columns' data types should be `bool`, but they are actually `float` or `int`, e.g., `result`, `firsttower`, `firstherald`, etc. After determining which rows should change data types, I convert all of them to the `bool` type.
+To save time in the further data cleaning steps, I first only keep the relevant columns: `result`, `side`, `firsttower`, `firstmidtower`, `heralds`, `firstherald`, `totalgold`, `goldat10`, `killsat10`, `golddiffat10`, `goldat15`, `killsat15`, `golddiffat15`, `firstblood`, `firstdragon`, `firstbaron`, `turretplates`, and `dragons(type unknown)`. From the last section, "Introduction of Columns", I found out that a lot of columns' data types should be `bool`, but they are actually `float` or `int`, e.g., `result`, `firsttower`, `firstherald`, etc. After determining which rows should change data types, I convert all of them to the `bool` type.
 
 Below is the head of my cleaned `lol` dataframe:
 
@@ -104,10 +104,10 @@ Overall, this visualization allows us to compare the total gold distributions fo
 ## Bivariate Analysis
 I performed bivariate analysis on the 'first turret' and 'result' statistics in the dataset to visualize the impact of obtaining the first tower on the game's outcome.
 
-|   False |   True |
-|--------:|-------:|
-|    6165 |   4328 |
-|    2663 |   7828 |
+| Game Result   |   False |   True |
+|:--------------|--------:|-------:|
+| Loss          |    6165 |   4328 |
+| Win           |    2663 |   7828 |
 
 <iframe
   src="assets/percent_win_w_ft.html"
