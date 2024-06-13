@@ -6,7 +6,7 @@ By Chengyuan Mao
 
 # Introduction
 ## General Introduction
-<a href="https://en.wikipedia.org/wiki/League_of_Legends">League of Legends (LoL)</a>, developed and published by <a href="https://en.wikipedia.org/wiki/Riot_Games">Riot Games, Inc.</a> in 2009, is a multiplayer online battle arena video game that has gained immense popularity worldwide. With its vast player base, it has emerged as one of the most influential and widely played esports titles in the gaming industry. The dataset we will be working with is a professional dataset curated by Oracle's Elixir, which records match data from professional LoL esports gaming events throughout the year 2023.
+<a href="https://en.wikipedia.org/wiki/League_of_Legends">League of Legends (LoL)</a>, developed and published by <a href="https://en.wikipedia.org/wiki/Riot_Games">Riot Games, Inc.</a> in 2009, is a multiplayer online battle arena video game that has gained immense popularity worldwide. With its vast player base, it has emerged as one of the most influential and widely played esports titles in the gaming industry. The dataset we will be working with is a professional dataset curated by <a href="https://oracleselixir.com/tools/downloads">Oracle's Elixir</a>, which records match data from professional LoL esports gaming events throughout the year 2023.
 
 ## Question Identification
 In a game of League of Legends, 10 players are divided into two teams to compete against each other. Each player has their own role and responsibilities, but the ultimate goal is to secure as many strategic resources as possible and eventually destroy the enemy's <a href="https://leagueoflegends.fandom.com/wiki/Nexus">Nexus</a> located in their base. On the League of Legends map, <a href="https://leagueoflegends.fandom.com/wiki/Turret">turrets</a> (tower) are considered one of the most important strategic resources. Taking down an opponent's turret not only grants each player on the team additional gold but also provides control over neutral resources and vision around the turret area. More importantly, if a team manages to take the first (mid lane) turret in a game, it signifies that they have gained an early advantage, which can have a profound impact on the team's economy and overall game situation.
@@ -137,6 +137,11 @@ In this section, I will test whether the missingness of the `dragons (type unkno
 
 Below is the observed distribution of `firstbaron` when `dragons (type unknown)` is missing and not missing.
 
+| firstdragon   |   Not missing |   Missing |
+|:--------------|--------------:|----------:|
+| False         |             0 |      8830 |
+| True          |          3330 |      8824 |
+
 <iframe
   src="assets/dist_TVD1.html"
   width="800"
@@ -152,6 +157,11 @@ Since the p-value `0.0` is less than `0.5` significance level, we reject the nul
 **Alternative Hypothesis**: The missingness of the `dragons (type unknown)` column **depends** on `result`.
 
 Below is the observed distribution of `result` when `dragons (type unknown)` is missing and not missing.
+
+| result   |   Not missing |   Missing |
+|:---------|--------------:|----------:|
+| False    |          1665 |      8828 |
+| True     |          1665 |      8826 |
 
 <iframe
   src="assets/dist_TVD2.html"
@@ -171,6 +181,11 @@ Since the p-value `1.0` is greater than `0.5` significance level, we **fail to r
 
 **Significance Level**: 5%
 
+| firsttower   |   totalgold |   Shuffled_Gold |
+|:-------------|------------:|----------------:|
+| False        |     54216.3 |         56970.7 |
+| True         |     58617.2 |         56616.9 |
+
 <iframe
   src="assets/permu_dist.html"
   width="800"
@@ -186,7 +201,7 @@ From the previous section, I observed that securing the first turret in a League
 
 However, the first mid-lane turret is even more crucial because the mid-lane can influence both the top and bottom lanes. Additionally, the team that secures the first mid-lane turret will have a significant control advantage over other important map resources, such as jungle monsters, dragons, and key vision areas. So, what factors influence whether a team can secure the first mid-lane turret? In other words, can I predict whether a team will secure the first mid-lane turret in a match by analyzing their game statistics (e.g., first blood kills, turret plates, gold difference, and other related features)?
 
-To address this question, I can use machine learning techniques, such as **classification algorithms**. Therefore, I establish my model based on the following **prediction problem**: Can I predict whether a team will secure the first mid-lane turret in a match based on their other game statistics? By analyzing and modeling these data, I aim to identify the key factors that influence this critical event, thereby helping teams develop more effective strategies and tactics to improve their chances of winning.
+To address this question, I can use machine learning techniques, such as **classification algorithms**. Therefore, I establish my model based on the following prediction problem: **Can I predict whether a team will secure the first mid-lane turret in a match based on their other game statistics?** By analyzing and modeling these data, I aim to identify the key factors that influence this critical event, thereby helping teams develop more effective strategies and tactics to improve their chances of winning.
 
 To prevent overfitting, I will split the data into two parts: 75% for training and 25% for testing. For model evaluation, I will use both accuracy and F1-score.
 
@@ -224,4 +239,4 @@ The followings are my hypothesis:
 
 **Test Statistics:**: ...
 
-After performing the permutation test, the result p-value I got is `1`, which is greater than the 0.05 significance level. Consequently, we ... reject the null hypothesis. This outcome implies that my model predicts teams from both groups with statistically similar accuracy levels. Consequently, my model appears to be fair, exhibiting no discernble bias towords one group over the other based on the specified criteria. (need rewrite)
+After performing the permutation test, the result p-value I got is `0.5`, which is greater than the 0.05 significance level. Consequently, we ... **reject** the null hypothesis. This outcome implies that my model predicts teams from both groups with statistically similar accuracy levels. Consequently, my model appears to be fair, exhibiting no discernble bias towords one group over the other based on the specified criteria. (need rewrite)
