@@ -6,7 +6,7 @@ By Chengyuan Mao
 
 # Introduction
 ## General Introduction
-<a href="https://en.wikipedia.org/wiki/League_of_Legends">League of Legends (LoL)</a>, developed and published by <a href="https://en.wikipedia.org/wiki/Riot_Games">Riot Games, Inc.</a> in 2009, is a multiplayer online battle arena video game that has gained immense popularity worldwide. With its vast player base, it has emerged as one of the most influential and widely played esports titles in the gaming industry. The dataset we will be working with is a professional dataset curated by <a href="https://oracleselixir.com/tools/downloads">Oracle's Elixir</a>, which records match data from professional LoL esports gaming events throughout the year 2023.
+<a href="https://en.wikipedia.org/wiki/League_of_Legends">League of Legends (LoL)</a>, developed and published by <a href="https://en.wikipedia.org/wiki/Riot_Games">Riot Games, Inc.</a> in 2009, is a multiplayer online battle arena video game that has gained immense popularity worldwide. With its vast player base, it has emerged as one of the most influential and widely played esports titles in the gaming industry. The dataset I will be working with is a professional dataset curated by <a href="https://oracleselixir.com/tools/downloads">Oracle's Elixir</a>, which records match data from professional LoL esports gaming events throughout the year 2023.
 
 ## Question Identification
 In a game of League of Legends, 10 players are divided into two teams to compete against each other. Each player has their own role and responsibilities, but the ultimate goal is to secure as many strategic resources as possible and eventually destroy the enemy's <a href="https://leagueoflegends.fandom.com/wiki/Nexus">Nexus</a> located in their base. On the League of Legends map, <a href="https://leagueoflegends.fandom.com/wiki/Turret">turrets</a> (tower) are considered one of the most important strategic resources. Taking down an opponent's turret not only grants each player on the team additional gold but also provides control over neutral resources and vision around the turret area. More importantly, if a team manages to take the first (mid lane) turret in a game, it signifies that they have gained an early advantage, which can have a profound impact on the team's economy and overall game situation.
@@ -154,7 +154,7 @@ Below is the observed distribution of `firstbaron` when `dragons (type unknown)`
   frameborder="0"
 ></iframe>
 
-Since the **p-value** of **0.0** is less than **0.05** significance level, we **reject** the null hypothesis. Therefore, the missingness of `dragons (type unknown)` is depends on the `firstbaron` column.
+Since the **p-value** of **0.0** is less than **0.05** significance level, I **reject** the null hypothesis. Therefore, the missingness of `dragons (type unknown)` is depends on the `firstbaron` column.
 
 ### The Second Permutation Test
 **Null Hypothesis**: The missingness of the `dragons (type unknown)` column is **independent** of `result`.
@@ -175,7 +175,7 @@ Below is the observed distribution of `result` when `dragons (type unknown)` is 
   frameborder="0"
 ></iframe>
 
-Since the **p-value** of **1.0** is greater than **0.05** significance level, we **fail to reject** the null hypothesis. Therefore, the missingness of `dragons (type unknown)` is **NOT** depends on the `result` column.
+Since the **p-value** of **1.0** is greater than **0.05** significance level, I **fail to reject** the null hypothesis. Therefore, the missingness of `dragons (type unknown)` is **NOT** depends on the `result` column.
 
 # Hypothesis Testing
 **Null Hypothesis**: The distribution of total gold for the team that gets the first turret is the same as the team that does not get the first turret. 
@@ -198,7 +198,7 @@ Since the **p-value** of **1.0** is greater than **0.05** significance level, we
   frameborder="0"
 ></iframe>
 
-Based on the hypothesis test performed, with a **p-value** of **0.0**, we **reject** the null hypothesis. This suggests that the distribution of total gold for the team that gets the first turret is **NOT** the same as the team that does not get the first turret.
+Based on the hypothesis test performed, with a **p-value** of **0.0**, I **reject** the null hypothesis. This suggests that the distribution of total gold for the team that gets the first turret is **NOT** the same as the team that does not get the first turret.
 
 # Framing a Prediction Problem
 ## Problem Identification
@@ -274,7 +274,7 @@ I performed a permutation test to assess the difference in accuracy between team
 
 **Result Interpretation**
 
-After performing the permutation test, the resulting **p-value** obtained was **0.72**, which is greater than the significance level of 0.05. Therefore, we fail to reject the null hypothesis. This outcome suggests that my model predicts teams from both the Blue and Red sides with statistically similar accuracy levels.
+After performing the permutation test, the resulting **p-value** obtained was **0.72**, which is greater than the significance level of 0.05. Therefore, I fail to reject the null hypothesis. This outcome suggests that my model predicts teams from both the Blue and Red sides with statistically similar accuracy levels.
 
 **Conclusion**
 
