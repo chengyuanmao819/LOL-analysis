@@ -154,7 +154,7 @@ Below is the observed distribution of `firstbaron` when `dragons (type unknown)`
   frameborder="0"
 ></iframe>
 
-Since the **p-value** of **0.0** is less than **0.05** significance level, I **reject** the null hypothesis. Therefore, the missingness of `dragons (type unknown)` is depends on the `firstbaron` column.
+Since the **p-value** of **0.0** is less than **0.05** significance level, I **reject** the null hypothesis. Therefore, the missingness of `dragons (type unknown)` is **depends** on the `firstbaron` column.
 
 ### The Second Permutation Test
 **Null Hypothesis**: The missingness of the `dragons (type unknown)` column is **independent** of `result`.
@@ -242,7 +242,7 @@ To enhance model performance, I conducted hyperparameter tuning using `GridSearc
 ### Model Performance:
 After fitting GridSearchCV to my training data and identifying the best parameters, my model delivered compelling results:
 - **Best Parameters**: Optimal settings were found with a `max_depth` of **102** and `n_estimators` of **182**, indicating the ideal complexity and ensemble size for my dataset.
-- **Accuracy Score**: Achieved a relative high accuracy score **of 0.8378** on the test data, demonstrating precise prediction capability.
+- **Accuracy Score**: Achieved a relative high accuracy score of **0.8378** on the test data, demonstrating precise prediction capability.
 - **F1 Score**: The F1 score of **0.8612** highlights excellent balance between precision and recall, underscoring robust performance across various evaluation metrics.
 
 These metrics suggest that these features are indeed valuable for predicting match outcomes in League of Legends, aligning with their impact on early game dynamics and strategic decision-making.
