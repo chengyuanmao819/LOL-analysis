@@ -274,7 +274,7 @@ I performed a permutation test to assess the difference in accuracy between team
 
 **Result Interpretation**
 
-After performing the permutation test, the resulting **p-value** obtained was **0.72**, which is greater than the significance level of 0.05. Therefore, I fail to reject the null hypothesis. This outcome suggests that my model predicts teams from both the Blue and Red sides with statistically similar accuracy levels.
+After performing the permutation test, the resulting **p-value** obtained was **0.72**, which is greater than the significance level of 0.05. Therefore, I **fail** to reject the null hypothesis. This outcome suggests that my model predicts teams from both the Blue and Red sides with statistically similar accuracy levels.
 
 **Conclusion**
 
