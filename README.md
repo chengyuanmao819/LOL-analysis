@@ -14,7 +14,7 @@ In a game of League of Legends, 10 players are divided into two teams to compete
 In this project, I aim to study the extent of the economic and situational advantages that securing the first (mid lane) turret brings to the team, and how these advantages influence the resource contention and the outcome of the game. Through this research, I hope to quantify the strategic value of the first mid lane turret and provide concrete data to help players and teams better understand and utilize this key resource, thereby enhancing the overall competitive level and tactical depth of the game.
 
 ## Introduction of Colmuns
-In this dataset, important features of each match in the 2023 professional League of Legends games are recorded, containing 148,992 rows, with each match looping in 12 rows. The first ten rows of each loop represent the ten players of the two teams, and the last two rows represent the aggregated data of the two teams.
+In this dataset, important features of each match in the 2023 professional League of Legends games are recorded, containing 125,905 rows, with each match looping in 12 rows. The first ten rows of each loop represent the ten players of the two teams, and the last two rows represent the aggregated data of the two teams.
 
 Below is a brief description of the columns related to my project and their data types:
 
