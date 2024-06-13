@@ -21,6 +21,7 @@ Below is a brief description of the columns related to my project and their data
 |Column Name                  |Type    |Description|
 |---                          |---     |---|
 |`'result'`                   |int     |Outcome of the match for the team (e.g., 1 for win, 0 for loss).|
+|`'side'`                     |str     |Indicates the team's position or affiliation within the game (e.g., "Blue" or "Red").|
 |`'firsttower'`               |float     |Indicator of whether the team destroyed the first tower in the game (e.g., 1 for yes, 0 for no).|
 |`'firstmidtower'`            |float     |Indicator of whether the team destroyed the first middle lane tower (e.g., 1 for yes, 0 for no).|
 |`'heralds'`                  |float     |Number of <a href="https://leagueoflegends.fandom.com/wiki/Rift_Herald/LoL">Rift Heralds</a> the team secured during the game.|
@@ -215,28 +216,70 @@ After fitting the model, my accuracy score is **0.9620** on the train data and *
 
 
 # Final Model
-In my final model, I added ...
+In my final model, I added `firstdragon`, `firstherald`, `killsat10`, `killsat15`, `goldat10`, `goldat15`, and `golddiffat15` to my baseline model. I am adding these 7 features into my model since I believe in a given LoL game, these features capture critical early game metrics and strategic advantages that significantly impact the outcome:
 
-After fitting the model, my accuracy score is **0.8400** on the test data with a **0.8627** F-1 score.
+1. **`firstdragon`**: Indicates which team secures the first dragon, offering early game advantage through buffs.
+   
+2. **`firstherald`**: Shows which team summons the Rift Herald first, influencing map control and objective pushes.
 
+3. **`killsat10`** and **`killsat15`**: Reflect the number of kills by 10 and 15 minutes, indicating early game dominance and potential snowball effects.
+
+4. **`goldat10`** and **`goldat15`**: Measure total gold accumulated by 10 and 15 minutes, highlighting economic strength and itemization advantages.
+
+5. **`golddiffat15`**: Represents the gold difference between teams at 15 minutes, indicating overall game control and potential outcomes.
+
+### Preprocessing Approach:
+I implemented a robust preprocessing pipeline using `ColumnTransformer`:
+- **Numeric Features**: Managed missing values with `SimpleImputer` using the median and applied `StandardScaler` for standardization.
+- **Categorical Features**: Addressed missing values with `RandomImputer` and used `OneHotEncoder` for categorical encoding, ensuring compatibility with the classifier.
+
+### Hyperparameter Optimization:
+To enhance model performance, I conducted hyperparameter tuning using `GridSearchCV`:
+- **`max_depth` and `n_estimators`**: Explored ranges (2 to 201 in steps of 20) and (2 to 201 in steps of 20), respectively, for the Random Forest Classifier.
+
+### Model Performance:
+After fitting GridSearchCV to my training data and identifying the best parameters, my model delivered compelling results:
+- **Best Parameters**: Optimal settings were found with a `max_depth` of 22 and `n_estimators` of 42, indicating the ideal complexity and ensemble size for my dataset.
+- **Accuracy Score**: Achieved a high accuracy score of 0.9993 on the test data, demonstrating precise prediction capability.
+- **F1 Score**: The F1 score of 0.9984 highlights excellent balance between precision and recall, underscoring robust performance across various evaluation metrics.
+
+After fitting the model, the results on the test data show:
+- Best Parameters: **a**
+- Accuracy: **0.8400**
+- F-1 Score: **0.8627**
+
+These metrics suggest that these features are indeed valuable for predicting match outcomes in League of Legends, aligning with their impact on early game dynamics and strategic decision-making.
 
 # Fairness Analysis
-In this section, I aim to evaluate the fairness of my model across different groups. The central question is:  **"Does my model perform worse for teams who have ... or not have ...?"** 
+In this section, I aim to evaluate the fairness of my model across different groups. The central question is: **"Does my model perform worse for teams who are on the Blue side or on the Red side?"**
 
 To address this query, I conducted a permutation test to examine the difference in accuracy between two groups:
 
-Group `X` represents the teams who have...
-Group `Y` represents those teams who do not have ... 
-The evaluation metric employed is accuracy, and the significance level is set at 0.5.
+- **Group X** represents the teams on the Blue side.
+- **Group Y** represents the teams on the Red side.
 
-By performing the permutation test and analyzing the accuracy differential, I endeavor to ascertain whether my model exhibits biased performance favoring one group over the other. This analysis is crucial for assessing the model's fairness and identifying potential areas for improvement to mitigate any undesirable disparities.
+The evaluation metric employed is accuracy, and the significance level is set at 0.05.
 
-The followings are my hypothesis:
+**Hypotheses:**
 
-**Null Hypothesis**: My model is fair. ...
+- **Null Hypothesis:** My model is fair. Its accuracy for teams on the Blue side and Red side are roughly the same, and any differences are due to random chance.
+- **Alternative Hypothesis:** My model is not fair. Its accuracy for teams on the Blue side is different from its accuracy for teams on the Red side.
 
-**Alternative Hypothesis**: My model is not fair. ...
+**Permutation Test:**
 
-**Test Statistics:**: ...
+I performed a permutation test to assess the difference in accuracy between teams on the Blue side and teams on the Red side. The test statistic used was the difference in mean accuracy between the two groups.
 
-After performing the permutation test, the result p-value I got is `0.5`, which is greater than the 0.05 significance level. Consequently, we ... **reject** the null hypothesis. This outcome implies that my model predicts teams from both groups with statistically similar accuracy levels. Consequently, my model appears to be fair, exhibiting no discernble bias towords one group over the other based on the specified criteria. (need rewrite)
+<iframe
+  src="assets/permu_accu_dist.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+**Result Interpretation:**
+
+After performing the permutation test, the resulting **p-value** obtained was **0.781**, which is greater than the significance level of 0.05. Therefore, we fail to reject the null hypothesis. This outcome suggests that my model predicts teams from both the Blue and Red sides with statistically similar accuracy levels.
+
+**Conclusion:**
+
+Based on the permutation test and analysis of accuracy differentials, my model appears to be fair, exhibiting no discernible bias towards teams on either the Blue or Red side. This assessment is crucial for ensuring fairness in predictions across different sides of the game.
