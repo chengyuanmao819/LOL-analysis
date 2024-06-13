@@ -41,17 +41,17 @@ Below is a brief description of the columns related to my project and their data
 
 # Data Cleaning and Exploratory Data Analysis
 ## Data Cleaning
-To save time in the further data cleaning steps, I first only keep the relevant columns: `result`, `firsttower`, `firstmidtower`, `heralds`, `firstherald`, `totalgold`, `goldat10`, `killsat10`, `golddiffat10`, `goldat15`, `killsat15`, `golddiffat15`, `firstblood`, `firstdragon`, `firstbaron`, `turretplates`, and `dragons(type unknown)`. From the last section, **"Introduction of Columns"**, I found out that a lot of columns' data types should be `bool`, but they are actually `float` or `int`, e.g., `result`, `firsttower`, `firstherald`, etc. After determining which rows should change data types, I convert all of them to the `bool` type.
+To save time in the further data cleaning steps, I first only keep the relevant columns: `result`, `side`, `firsttower`, `firstmidtower`, `heralds`, `firstherald`, `totalgold`, `goldat10`, `killsat10`, `golddiffat10`, `goldat15`, `killsat15`, `golddiffat15`, `firstblood`, `firstdragon`, `firstbaron`, `turretplates`, and `dragons(type unknown)`. From the last section, **"Introduction of Columns"**, I found out that a lot of columns' data types should be `bool`, but they are actually `float` or `int`, e.g., `result`, `firsttower`, `firstherald`, etc. After determining which rows should change data types, I convert all of them to the `bool` type.
 
 Below is the head of my cleaned `lol` dataframe:
 
-|    | result   | firsttower   | firstmidtower   |   heralds | firstherald   |   totalgold |   goldat10 |   killsat10 |   golddiffat10 |   goldat15 |   killsat15 |   golddiffat15 | firstblood   | firstdragon   |   firstbaron |   turretplates |   dragons (type unknown) |
-|---:|:---------|:-------------|:----------------|----------:|:--------------|------------:|-----------:|------------:|---------------:|-----------:|------------:|---------------:|:-------------|:--------------|-------------:|---------------:|-------------------------:|
-|  0 | True     | True         | True            |         2 | True          |       72807 |      14612 |           0 |             75 |      22384 |           0 |           -530 | False        | False         |            1 |              4 |                      nan |
-|  1 | False    | False        | False           |         0 | False         |       62745 |      14537 |           0 |            -75 |      22914 |           1 |            530 | True         | True          |            0 |              2 |                      nan |
-|  2 | False    | False        | True            |         2 | True          |       80627 |      15969 |           2 |           -361 |      24771 |           4 |            673 | False        | False         |            1 |              6 |                      nan |
-|  3 | True     | True         | False           |         0 | False         |       77449 |      16330 |           2 |            361 |      24098 |           3 |           -673 | True         | True          |            0 |              2 |                      nan |
-|  4 | True     | False        | True            |         0 | False         |       60938 |      14794 |           1 |          -1001 |      22945 |           2 |          -1901 | False        | False         |            0 |              3 |                      nan |
+| result   | side   | firsttower   | firstmidtower   |   heralds | firstherald   |   totalgold |   goldat10 |   killsat10 |   golddiffat10 |   goldat15 |   killsat15 |   golddiffat15 | firstblood   | firstdragon   |   firstbaron |   turretplates |   dragons (type unknown) |
+|:---------|:-------|:-------------|:----------------|----------:|:--------------|------------:|-----------:|------------:|---------------:|-----------:|------------:|---------------:|:-------------|:--------------|-------------:|---------------:|-------------------------:|
+| True     | Blue   | True         | True            |         2 | True          |       72807 |      14612 |           0 |             75 |      22384 |           0 |           -530 | False        | False         |            1 |              4 |                      nan |
+| False    | Red    | False        | False           |         0 | False         |       62745 |      14537 |           0 |            -75 |      22914 |           1 |            530 | True         | True          |            0 |              2 |                      nan |
+| False    | Blue   | False        | True            |         2 | True          |       80627 |      15969 |           2 |           -361 |      24771 |           4 |            673 | False        | False         |            1 |              6 |                      nan |
+| True     | Red    | True         | False           |         0 | False         |       77449 |      16330 |           2 |            361 |      24098 |           3 |           -673 | True         | True          |            0 |              2 |                      nan |
+| True     | Blue   | False        | True            |         0 | False         |       60938 |      14794 |           1 |          -1001 |      22945 |           2 |          -1901 | False        | False         |            0 |              3 |                      nan |
 
 ## Univariate Analysis
 I plot a graph for the distribution of total gold using a histogram:
@@ -77,7 +77,6 @@ Some key observations from the distribution:
 4. There are a few outliers or rare cases with extremely high gold amounts beyond 90,000 units.
 
 This type of distribution pattern could arise in various contexts, such as wealth or resource ownership, where a majority of cases cluster around a moderate level, but there are also some cases with significantly more or less of the measured quantity.
-
 
 And an overlapping graph for the total gold distribution by the first turret status:
 
@@ -105,6 +104,11 @@ Overall, this visualization allows us to compare the total gold distributions fo
 ## Bivariate Analysis
 I performed bivariate analysis on the 'first turret' and 'result' statistics in the dataset to visualize the impact of obtaining the first tower on the game's outcome.
 
+|   False |   True |
+|--------:|-------:|
+|    6165 |   4328 |
+|    2663 |   7828 |
+
 <iframe
   src="assets/percent_win_w_ft.html"
   width="800"
@@ -126,7 +130,11 @@ I first groupby the cleaned data set with firsttower status and then calculate t
 
 # Assessment of Missingness
 ## NMAR Analysis
-In my dataset, I believe the colums `a`
+In my dataset, I believe the columns `teamid` are Not Missing At Random (NMAR). Upon further observation, I have determined that the missing data in the `teamid` column does not follow any obvious pattern, nor is there any evidence to suggest that it depends on other columns. The official League of Legends organization has increased the number of scouting tournaments to attract more young teams. In these scouting tournaments, some teams are either temporarily assembled or have been formed very recently and, as a result, have not been assigned a teamid by the officials. This leads to the missing data in the `teamid` column.
+
+To elaborate further, the missing `teamid` data is directly related to the nature of these scouting tournaments. These events are designed to provide opportunities for emerging talent, which means many teams are newly formed and may not yet have a permanent status within the official league structure. The lack of a teamid is a consequence of their temporary or nascent status, and this missingness is not influenced by other observed data such as game statistics or performance metrics.
+
+Given this context, it is clear that the missingness of the `teamid` column is related to specific characteristics of the teams and the circumstances under which they were created, rather than being randomly distributed or dependent on other variables. Therefore, this is a reasonable explanation for the `teamid` column being NMAR.
 
 ## Missingness Dependency
 In this section, I will test whether the missingness of the `dragons (type unknown)` column depends on `firstbaron` and `result`. For both of my permutation tests, I will use a significance level of 0.05 and Total Variance Distance (TVD) as the test statistic.
@@ -202,18 +210,16 @@ From the previous section, I observed that securing the first turret in a League
 
 However, the first mid-lane turret is even more crucial because the mid-lane can influence both the top and bottom lanes. Additionally, the team that secures the first mid-lane turret will have a significant control advantage over other important map resources, such as jungle monsters, dragons, and key vision areas. So, what factors influence whether a team can secure the first mid-lane turret? In other words, can I predict whether a team will secure the first mid-lane turret in a match by analyzing their game statistics (e.g., first blood kills, turret plates, gold difference, and other related features)?
 
-To address this question, I can use machine learning techniques, such as **classification algorithms**. Therefore, I establish my model based on the following prediction problem: **Can I predict whether a team will secure the first mid-lane turret in a match based on their other game statistics?** By analyzing and modeling these data, I aim to identify the key factors that influence this critical event, thereby helping teams develop more effective strategies and tactics to improve their chances of winning.
+To address this question, I can use machine learning techniques, such as **classification algorithms**. Therefore, I establish my model based on the following **prediction problem**: Can I predict whether a team will secure the first mid-lane turret in a match based on their other game statistics? By analyzing and modeling these data, I aim to identify the key factors that influence this critical event, thereby helping teams develop more effective strategies and tactics to improve their chances of winning.
 
 To prevent overfitting, I will split the data into two parts: 75% for training and 25% for testing. For model evaluation, I will use both accuracy and F1-score.
 
 For each team, I will use the following features for prediction: `heralds`, `firstblood`, `turretplates`, `golddiffat10`, and `firsttower`. These statistics are collected during the game and will be used to train my model.
 
-
 # Baseline Model
-For the baseline model, I used a Random Forest Classifier, with the following features: `heralds`, `firstblood`, `turretplates`, `golddiffat10`, and `firsttower`. Among these five features, three of them are quantitative: `heralds`, `turretplates`, and `golddiffat10`. I utilized Stan
+For the baseline model, I utilized a Random Forest Classifier with the following features: `heralds`, `firstblood`, `turretplates`, `golddiffat10`, and `firsttower`. Among these five features, `firstblood` and `firsttower` are categorical. To handle these categorical columns, I implemented a helper method called `RandomImputer`, and applied `RandomImputer` along with `OneHotEncoder` to preprocess these two features.
 
 After fitting the model, my accuracy score is **0.9620** on the train data and **0.7220** on the test data with a **0.7671** F-1 score.
-
 
 # Final Model
 In my final model, I added `firstdragon`, `firstherald`, `killsat10`, `killsat15`, `goldat10`, `goldat15`, and `golddiffat15` to my baseline model. I am adding these 7 features into my model since I believe in a given LoL game, these features capture critical early game metrics and strategic advantages that significantly impact the outcome:
@@ -243,11 +249,6 @@ After fitting GridSearchCV to my training data and identifying the best paramete
 - **Accuracy Score**: Achieved a high accuracy score of 0.9993 on the test data, demonstrating precise prediction capability.
 - **F1 Score**: The F1 score of 0.9984 highlights excellent balance between precision and recall, underscoring robust performance across various evaluation metrics.
 
-After fitting the model, the results on the test data show:
-- Best Parameters: **a**
-- Accuracy: **0.8400**
-- F-1 Score: **0.8627**
-
 These metrics suggest that these features are indeed valuable for predicting match outcomes in League of Legends, aligning with their impact on early game dynamics and strategic decision-making.
 
 # Fairness Analysis
@@ -260,12 +261,11 @@ To address this query, I conducted a permutation test to examine the difference 
 
 The evaluation metric employed is accuracy, and the significance level is set at 0.05.
 
-**Hypotheses:**
-
+**Hypotheses**
 - **Null Hypothesis:** My model is fair. Its accuracy for teams on the Blue side and Red side are roughly the same, and any differences are due to random chance.
 - **Alternative Hypothesis:** My model is not fair. Its accuracy for teams on the Blue side is different from its accuracy for teams on the Red side.
 
-**Permutation Test:**
+**Permutation Test**
 
 I performed a permutation test to assess the difference in accuracy between teams on the Blue side and teams on the Red side. The test statistic used was the difference in mean accuracy between the two groups.
 
@@ -276,10 +276,10 @@ I performed a permutation test to assess the difference in accuracy between team
   frameborder="0"
 ></iframe>
 
-**Result Interpretation:**
+**Result Interpretation**
 
 After performing the permutation test, the resulting **p-value** obtained was **0.781**, which is greater than the significance level of 0.05. Therefore, we fail to reject the null hypothesis. This outcome suggests that my model predicts teams from both the Blue and Red sides with statistically similar accuracy levels.
 
-**Conclusion:**
+**Conclusion**
 
 Based on the permutation test and analysis of accuracy differentials, my model appears to be fair, exhibiting no discernible bias towards teams on either the Blue or Red side. This assessment is crucial for ensuring fairness in predictions across different sides of the game.
